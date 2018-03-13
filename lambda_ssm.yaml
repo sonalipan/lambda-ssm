@@ -1,0 +1,24 @@
+﻿AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: An Amazon SNS trigger that logs the message pushed to the SNS topic.
+Resources:
+  lambdassm:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: lambda_ssm.lambda_handler 
+      Runtime: python2.7
+      CodeUri: s3://lambda-ssm/lambda_ssm.zip
+      Description: An Amazon SNS trigger that logs the message pushed to the SNS topic.
+      MemorySize: 128
+      Timeout: 3
+      Role: 'arn:aws:iam::283763179150:role/sns_lambda_role_sonali'
+      Events:
+        SNS1:
+          Type: SNS
+          Properties:
+            Topic:
+              Ref: SNSTopic1
+      Tags:
+        'lambda-console:blueprint': sns-message-python
+  SNSTopic1:
+    Type: 'AWS::SNS::Topic'
