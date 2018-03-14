@@ -42,4 +42,4 @@ def lambda_handler(event, context):
           ]
         }
     )
-    print("From SNS: " + message)
+    print("From SNS new: " + message)
