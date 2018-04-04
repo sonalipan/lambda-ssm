@@ -1,0 +1,1147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0073)https://docs.aws.amazon.com/lambda/latest/dg/with-sns-create-package.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      
+      <title>Step 2.1: Create a Lambda Function
+         Deployment Package - AWS Lambda
+      </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="home" href="https://docs.aws.amazon.com/lambda/latest/dg/with-sns-create-package.html#top">
+      <link rel="up" href="https://docs.aws.amazon.com/lambda/latest/dg/with-sns-example-create-test-function.html" title="Step 2: Create a
+                Lambda Function ">
+      <link rel="prev" href="https://docs.aws.amazon.com/lambda/latest/dg/with-sns-example-create-test-function.html" title="Step 2: Create a
+                Lambda Function ">
+      <link rel="next" href="https://docs.aws.amazon.com/lambda/latest/dg/with-sns-example-create-iam-role.html" title="Step 2.2: Create the Execution
+            Role (IAM Role)">
+      <meta name="description" content="From the Filter View list, choose the language you want to use for your Lambda function. The appropriate section appears with code and specific instructions for creating a deployment package.">
+      <meta name="deployment_region" content="IAD">
+      <meta name="product" content="AWS Lambda">
+      <meta name="guide" content="Developer Guide">
+      <meta name="guide-locale" content="en_us">
+      <link rel="icon" type="image/ico" href="https://docs.aws.amazon.com/images/favicon.ico">
+      <link rel="shortcut icon" type="image/ico" href="https://docs.aws.amazon.com/images/favicon.ico">
+      <link rel="canonical" href="https://docs.aws.amazon.com/lambda/latest/dg/with-sns-create-package.html">
+      <link rel="stylesheet" type="text/css" href="./Step 2.1_ Create a Lambda Function Deployment Package - AWS Lambda_files/jquery-ui.min.css">
+      <link rel="stylesheet" type="text/css" href="./Step 2.1_ Create a Lambda Function Deployment Package - AWS Lambda_files/font-awesome.min.css">
+      <link rel="stylesheet" type="text/css" href="./Step 2.1_ Create a Lambda Function Deployment Package - AWS Lambda_files/google-font.css">
+      <link id="code-style" rel="stylesheet" type="text/css" href="./Step 2.1_ Create a Lambda Function Deployment Package - AWS Lambda_files/light.css">
+      <link rel="stylesheet" type="text/css" href="./Step 2.1_ Create a Lambda Function Deployment Package - AWS Lambda_files/jquery-ui.theme.css">
+      <link rel="stylesheet" type="text/css" href="./Step 2.1_ Create a Lambda Function Deployment Package - AWS Lambda_files/colorbox.css">
+      <link rel="stylesheet" type="text/css" href="./Step 2.1_ Create a Lambda Function Deployment Package - AWS Lambda_files/awsdocs.css"><script type="text/javascript" src="./Step 2.1_ Create a Lambda Function Deployment Package - AWS Lambda_files/highlight.pack.js.download"></script><script type="text/javascript" src="./Step 2.1_ Create a Lambda Function Deployment Package - AWS Lambda_files/jquery.min.js.download"></script><script type="text/javascript" src="./Step 2.1_ Create a Lambda Function Deployment Package - AWS Lambda_files/jquery-ui.min.js.download"></script><script type="text/javascript" src="./Step 2.1_ Create a Lambda Function Deployment Package - AWS Lambda_files/handlebars.js.download"></script><script type="text/javascript" src="./Step 2.1_ Create a Lambda Function Deployment Package - AWS Lambda_files/jquery.colorbox.js.download"></script><script type="text/javascript" src="./Step 2.1_ Create a Lambda Function Deployment Package - AWS Lambda_files/awsdocs.min.js.download"></script></head>
+   <body id="top">
+      <div xmlns:db="http://docbook.org/ns/docbook" id="aws-nav" class="aws-nav-header">
+         <div class="aws-nav-header-left">
+            <div id="aws-nav-flyout-trigger" class="aws-nav-flyout-trigger"><i class="fa fa-bars fa-2x"></i>Menu
+            </div>
+            <div class="aws-nav-logo">
+               <!--aws_logo_105x39.png--><a href="http://aws.amazon.com/"><img src="./Step 2.1_ Create a Lambda Function Deployment Package - AWS Lambda_files/aws_logo_105x39.png" alt="Amazon Web Services"></a></div>
+         </div>
+         <div id="aws-nav-header-right" class="aws-nav-header-right">
+            <div class="aws-nav-cta-button-outer"><a id="aws-nav-cta-button" class="aws-nav-button" href="https://console.aws.amazon.com/console/home">Sign In to the Console</a></div>
+            <div class="aws-nav-popover-trigger" data-dropdown="aws-nav-dropdown-lang"><select id="languageSelection" onchange="SelectLanguage()" style="display: none;">
+                  <option value="/de_de/lambda/latest/dg/with-sns-create-package.html">Deutsch</option>
+                  <option value="/en_us/lambda/latest/dg/with-sns-create-package.html" selected="selected">English</option>
+                  <option value="/es_es/lambda/latest/dg/with-sns-create-package.html">Español</option>
+                  <option value="/fr_fr/lambda/latest/dg/with-sns-create-package.html">Français</option>
+                  <option value="/ja_jp/lambda/latest/dg/with-sns-create-package.html">日本語</option>
+                  <option value="/ko_kr/lambda/latest/dg/with-sns-create-package.html">한국어</option>
+                  <option value="/pt_br/lambda/latest/dg/with-sns-create-package.html">Português</option>
+                  <option value="/zh_cn/lambda/latest/dg/with-sns-create-package.html">中文 (简体)</option></select><span class="ui-selectmenu-button ui-widget ui-state-default ui-corner-all" tabindex="0" id="languageSelection-button" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-owns="languageSelection-menu" aria-haspopup="true" style="width: 68px;"><span class="ui-icon ui-icon-triangle-1-s"></span><span class="ui-selectmenu-text">English</span></span></div><a class="btn btn-pdf-link" id="pdf-link-top" href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-dg.pdf#with-sns-create-package" target="_blank" style="background-image: url(&quot;/images/Adobe_PDF_icon.png&quot;)" title="Open PDF"></a><a class="btn btn-github-link" id="github-link-top" href="https://github.com/awsdocs/aws-lambda-developer-guide/tree/master/doc_source/with-sns-create-package.md" target="_blank" style="background-image: url(&quot;/images/GitHub-Mark-32px.png&quot;)" title="Edit on GitHub"></a><div id="aws-nav-quicklinks-separator" class="aws-nav-quicklinks-separator">
+               <div class="aws-nav-left"></div>
+               <div class="aws-nav-right"></div>
+            </div>
+         </div>
+         <div xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0" id="topnav-flyout-menu-container" style="display: none;">
+            <ul id="topnav-flyout-menu" class="ui-menu ui-widget ui-widget-content" role="menu" tabindex="0">           
+                    
+                    <li class="ui-menu-item" id="ui-id-1" tabindex="-1" role="menuitem">AWS Home
+                    </li>
+                    
+                    
+                    <li aria-haspopup="true" class="ui-menu-item" id="ui-id-2" tabindex="-1" role="menuitem"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>Compute
+                        <ul class="ui-menu ui-widget ui-widget-content ui-front" role="menu" aria-hidden="true" aria-expanded="false" style="display: none;">
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-3" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/ec2/?icmpid=docs_menu_internal">Amazon EC2</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-4" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/ecr/?icmpid=docs_menu_internal">Amazon ECR</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-5" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/ecs/?icmpid=docs_menu_internal">Amazon ECS</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-6" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/lightsail/?icmpid=docs_menu_internal">Amazon Lightsail</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-7" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/vpc/?icmpid=docs_menu_internal">Amazon VPC</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-8" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/batch/?icmpid=docs_menu_internal">AWS Batch</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-9" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/elastic-beanstalk/?icmpid=docs_menu_internal">AWS Elastic Beanstalk</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-10" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/lambda/?icmpid=docs_menu_internal">AWS Lambda</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-11" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/serverlessrepo/?icmpid=docs_menu_internal">AWS Serverless Application Repository</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-12" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/autoscaling/?icmpid=docs_menu_internal">Auto Scaling</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-13" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/elasticloadbalancing/?icmpid=docs_menu_internal">Elastic Load Balancing</a></li>
+                        </ul>
+                    </li>
+                    
+                    
+                    <li aria-haspopup="true" class="ui-menu-item" id="ui-id-14" tabindex="-1" role="menuitem"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>Storage
+                        <ul class="ui-menu ui-widget ui-widget-content ui-front" role="menu" aria-hidden="true" aria-expanded="false" style="display: none;">
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-15" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/s3/?icmpid=docs_menu_internal">Amazon S3</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-16" tabindex="-1" role="menuitem"><a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html?icmpid=docs_menu_internal">Amazon EBS</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-17" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/efs/?icmpid=docs_menu_internal">Amazon EFS</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-18" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/glacier/?icmpid=docs_menu_internal">Amazon Glacier</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-19" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/snowball/?icmpid=docs_menu_internal">AWS Snowball</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-20" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/storage-gateway/?icmpid=docs_menu_internal">AWS Storage Gateway</a></li>
+                        </ul>
+                    </li>
+                    
+                    
+                    <li aria-haspopup="true" class="ui-menu-item" id="ui-id-21" tabindex="-1" role="menuitem"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>Database
+                        <ul class="ui-menu ui-widget ui-widget-content ui-front" role="menu" aria-hidden="true" aria-expanded="false" style="display: none;">
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-22" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/rds/?icmpid=docs_menu_internal">Amazon RDS</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-23" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/dynamodb/?icmpid=docs_menu_internal">Amazon DynamoDB</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-24" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/elasticache/?icmpid=docs_menu_internal">Amazon ElastiCache</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-25" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/neptune/?icmpid=docs_menu_internal">Amazon Neptune</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-26" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/redshift/?icmpid=docs_menu_internal">Amazon Redshift</a></li>
+                        </ul>
+                    </li>
+                    
+                    
+                    <li aria-haspopup="true" class="ui-menu-item" id="ui-id-27" tabindex="-1" role="menuitem"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>Networking &amp; Content Delivery
+                        <ul class="ui-menu ui-widget ui-widget-content ui-front" role="menu" aria-hidden="true" aria-expanded="false" style="display: none;">
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-28" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/vpc/?icmpid=docs_menu_internal">Amazon VPC</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-29" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/cloudfront/?icmpid=docs_menu_internal">Amazon CloudFront</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-30" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/direct-connect/?icmpid=docs_menu_internal">AWS Direct Connect</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-31" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/elasticloadbalancing/?icmpid=docs_menu_internal">Elastic Load Balancing</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-32" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/route53/?icmpid=docs_menu_internal">Amazon Route 53</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-33" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/apigateway/?icmpid=docs_menu_internal">Amazon API Gateway</a></li>
+                        </ul>
+                    </li>
+                    
+                    
+                    <li aria-haspopup="true" class="ui-menu-item" id="ui-id-34" tabindex="-1" role="menuitem"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>Migration
+                        <ul class="ui-menu ui-widget ui-widget-content ui-front" role="menu" aria-hidden="true" aria-expanded="false" style="display: none;">
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-35" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/dms/?icmpid=docs_menu_internal">AWS Database Migration Service</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-36" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/server-migration-service/?icmpid=docs_menu_internal">AWS Server Migration Service</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-37" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/SchemaConversionTool/?icmpid=docs_menu_internal">AWS Schema Conversion Tool</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-38" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/importexport/?icmpid=docs_menu_internal">AWS Import/Export</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-39" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/migrationhub/?icmpid=docs_menu_internal">AWS Migration Hub</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-40" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/application-discovery/?icmpid=docs_menu_internal">AWS Application Discovery Service</a></li>
+                        </ul>
+                    </li>
+                    
+                    
+                    <li aria-haspopup="true" class="ui-menu-item" id="ui-id-41" tabindex="-1" role="menuitem"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>Developer Tools
+                        <ul class="ui-menu ui-widget ui-widget-content ui-front" role="menu" aria-hidden="true" aria-expanded="false" style="display: none;">
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-42" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/cloud9/?icmpid=docs_menu_internal">AWS Cloud9</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-43" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/codestar/?icmpid=docs_menu_internal">AWS CodeStar</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-44" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/codecommit/?icmpid=docs_menu_internal">AWS CodeCommit</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-45" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/codebuild/?icmpid=docs_menu_internal">AWS CodeBuild</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-46" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/codedeploy/?icmpid=docs_menu_internal">AWS CodeDeploy</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-47" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/codepipeline/?icmpid=docs_menu_internal">AWS CodePipeline</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-48" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/xray/?icmpid=docs_menu_internal">AWS X-Ray</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-49" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/tools/?icmpid=docs_menu_internal">AWS Tools &amp; SDKs</a></li>
+                        </ul>
+                    </li>
+                    
+                    
+                    <li aria-haspopup="true" class="ui-menu-item" id="ui-id-50" tabindex="-1" role="menuitem"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>Management Tools
+                        <ul class="ui-menu ui-widget ui-widget-content ui-front" role="menu" aria-hidden="true" aria-expanded="false" style="display: none;">
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-51" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/cloudwatch/?icmpid=docs_menu_internal">Amazon CloudWatch</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-52" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/cloudformation/?icmpid=docs_menu_internal">AWS CloudFormation</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-53" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/cloudtrail/?icmpid=docs_menu_internal">AWS CloudTrail</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-54" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/config/?icmpid=docs_menu_internal">AWS Config</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-55" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/opsworks/?icmpid=docs_menu_internal">AWS OpsWorks</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-56" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/servicecatalog/?icmpid=docs_menu_internal">AWS Service Catalog</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-57" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/systems-manager/?icmpid=docs_menu_internal">AWS Systems Manager</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-58" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/aws-support/?icmpid=docs_menu_internal">Trusted Advisor</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-59" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/health/?icmpid=docs_menu_internal">AWS Health</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-60" tabindex="-1" role="menuitem"><a href="http://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/getting-started.html?icmpid=docs_menu_internal">AWS Management Console</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-61" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/cli/?icmpid=docs_menu_internal">AWS Command Line Interface</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-62" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/powershell/?icmpid=docs_menu_internal">AWS Tools for PowerShell</a></li>
+                        </ul>
+                    </li>
+                    
+                    
+                    <li aria-haspopup="true" class="ui-menu-item" id="ui-id-63" tabindex="-1" role="menuitem"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>Media Services
+                        <ul class="ui-menu ui-widget ui-widget-content ui-front" role="menu" aria-hidden="true" aria-expanded="false" style="display: none;">
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-64" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/elastic-transcoder/?icmpid=docs_menu_internal">Amazon Elastic Transcoder</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-65" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/mediaconvert/?icmpid=docs_menu_internal">AWS Elemental MediaConvert</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-66" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/medialive/?icmpid=docs_menu_internal">AWS Elemental MediaLive</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-67" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/mediapackage/?icmpid=docs_menu_internal">AWS Elemental MediaPackage</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-68" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/mediastore/?icmpid=docs_menu_internal">AWS Elemental MediaStore</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-69" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/mediatailor/?icmpid=docs_menu_internal">AWS Elemental MediaTailor</a></li>
+                        </ul>
+                    </li>
+                    
+                    
+                    <li aria-haspopup="true" class="ui-menu-item" id="ui-id-70" tabindex="-1" role="menuitem"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>Security, Identity, &amp; Compliance
+                        <ul class="ui-menu ui-widget ui-widget-content ui-front" role="menu" aria-hidden="true" aria-expanded="false" style="display: none;">
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-71" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/iam/?icmpid=docs_menu_internal">IAM</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-72" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/guardduty/?icmpid=docs_menu_internal">Amazon GuardDuty</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-73" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/inspector/?icmpid=docs_menu_internal">Amazon Inspector</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-74" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/artifact/?icmpid=docs_menu_internal">AWS Artifact</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-75" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/acm/?icmpid=docs_menu_internal">AWS Certificate Manager</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-76" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/directory-service/?icmpid=docs_menu_internal">AWS Directory Service</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-77" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/cloudhsm/?icmpid=docs_menu_internal">AWS CloudHSM</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-78" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/singlesignon/?icmpid=docs_menu_internal">AWS Single Sign-On</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-79" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/kms/?icmpid=docs_menu_internal">AWS KMS</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-80" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/macie/?icmpid=docs_menu_internal">Amazon Macie</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-81" tabindex="-1" role="menuitem"><a href="https://aws.amazon.com/documentation/organizations/?icmpid=docs_menu_internal">AWS Organizations</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-82" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/waf/?icmpid=docs_menu_internal">AWS Shield</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-83" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/waf/?icmpid=docs_menu_internal">AWS WAF</a></li>
+                        </ul>
+                    </li>
+                    
+                    
+                    <li aria-haspopup="true" class="ui-menu-item" id="ui-id-84" tabindex="-1" role="menuitem"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>Analytics
+                        <ul class="ui-menu ui-widget ui-widget-content ui-front" role="menu" aria-hidden="true" aria-expanded="false" style="display: none;">
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-85" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/athena/?icmpid=docs_menu_internal">Amazon Athena</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-86" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/elasticmapreduce/?icmpid=docs_menu_internal">Amazon EMR</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-87" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/cloudsearch/?icmpid=docs_menu_internal">Amazon CloudSearch</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-88" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/elasticsearch-service/?icmpid=docs_menu_internal">Amazon Elasticsearch Service</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-89" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/glue/?icmpid=docs_menu_internal">AWS Glue</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-90" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/kinesis/?icmpid=docs_menu_internal">Amazon Kinesis</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-91" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/redshift/?icmpid=docs_menu_internal">Amazon Redshift</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-92" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/quicksight/?icmpid=docs_menu_internal">Amazon QuickSight</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-93" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/datapipeline/?icmpid=docs_menu_internal">AWS Data Pipeline</a></li>
+                        </ul>
+                    </li>
+                    
+                    
+                    <li aria-haspopup="true" class="ui-menu-item" id="ui-id-94" tabindex="-1" role="menuitem"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>Machine Learning
+                        <ul class="ui-menu ui-widget ui-widget-content ui-front" role="menu" aria-hidden="true" aria-expanded="false" style="display: none;">
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-95" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/comprehend/?icmpid=docs_menu_internal">Amazon Comprehend</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-96" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/lex/?icmpid=docs_menu_internal">Amazon Lex</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-97" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/machine-learning/?icmpid=docs_menu_internal">Amazon Machine Learning</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-98" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/polly/?icmpid=docs_menu_internal">Amazon Polly</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-99" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/sagemaker/?icmpid=docs_menu_internal">Amazon SageMaker</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-100" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/transcribe/?icmpid=docs_menu_internal">Amazon Transcribe</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-101" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/translate/?icmpid=docs_menu_internal">Amazon Translate</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-102" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/deeplens/?icmpid=docs_menu_internal">AWS DeepLens</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-103" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/rekognition/?icmpid=docs_menu_internal">AWS Rekognition</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-104" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/dlami/?icmpid=docs_menu_internal">AWS Deep Learning AMI</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-105" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/mxnet/?icmpid=docs_menu_internal">Apache MXNet on AWS</a></li>
+                        </ul>
+                    </li>
+                    
+                    
+                    <li aria-haspopup="true" class="ui-menu-item" id="ui-id-106" tabindex="-1" role="menuitem"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>Internet of Things
+                        <ul class="ui-menu ui-widget ui-widget-content ui-front" role="menu" aria-hidden="true" aria-expanded="false" style="display: none;">
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-107" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/iot/?icmpid=docs_menu_internal">AWS IoT Core</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-108" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/freertos/?icmpid=docs_menu_internal">AWS FreeRTOS</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-109" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/greengrass/?icmpid=docs_menu_internal">AWS Greengrass</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-110" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/iot-device-management/?icmpid=docs_menu_internal">AWS IoT Device Management</a></li>
+                        </ul>
+                    </li>
+                    
+                    
+                    <li aria-haspopup="true" class="ui-menu-item" id="ui-id-111" tabindex="-1" role="menuitem"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>Contact Center
+                        <ul class="ui-menu ui-widget ui-widget-content ui-front" role="menu" aria-hidden="true" aria-expanded="false" style="display: none;">
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-112" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/connect/?icmpid=docs_menu_internal">Amazon Connect</a></li>
+                        </ul>
+                    </li>
+                    
+                    
+                    <li aria-haspopup="true" class="ui-menu-item" id="ui-id-113" tabindex="-1" role="menuitem"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>Game Development
+                        <ul class="ui-menu ui-widget ui-widget-content ui-front" role="menu" aria-hidden="true" aria-expanded="false" style="display: none;">
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-114" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/lumberyard/?icmpid=docs_menu_internal">Amazon Lumberyard</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-115" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/gamelift/?icmpid=docs_menu_internal">Amazon GameLift</a></li>
+                        </ul>
+                    </li>
+                    
+                    
+                    <li aria-haspopup="true" class="ui-menu-item" id="ui-id-116" tabindex="-1" role="menuitem"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>Mobile Services
+                        <ul class="ui-menu ui-widget ui-widget-content ui-front" role="menu" aria-hidden="true" aria-expanded="false" style="display: none;">
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-117" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/mobile-hub/?icmpid=docs_menu_internal">AWS Mobile Hub</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-118" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/appsync/?icmpid=docs_menu_internal">AWS AppSync</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-119" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/cognito/?icmpid=docs_menu_internal">Amazon Cognito</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-120" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/devicefarm/?icmpid=docs_menu_internal">AWS Device Farm</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-121" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/mobileanalytics/?icmpid=docs_menu_internal">Amazon Mobile Analytics</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-122" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/pinpoint/?icmpid=docs_menu_internal">Amazon Pinpoint</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-123" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/sdk-for-android/?icmpid=docs_menu_internal">AWS Mobile SDK for Android</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-124" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/sdk-for-ios/?icmpid=docs_menu_internal">AWS Mobile SDK for iOS</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-125" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/sdk-for-unity/?icmpid=docs_menu_internal">AWS Mobile SDK for Unity</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-126" tabindex="-1" role="menuitem"><a href="http://docs.aws.amazon.com/mobile/sdkforxamarin/developerguide/index.html?icmpid=docs_menu_internal">AWS Mobile SDK for Xamarin</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-127" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/sns/?icmpid=docs_menu_internal">Amazon SNS</a></li>
+                        </ul>
+                    </li>
+                    
+                    
+                    <li aria-haspopup="true" class="ui-menu-item" id="ui-id-128" tabindex="-1" role="menuitem"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>AR &amp; VR
+                        <ul class="ui-menu ui-widget ui-widget-content ui-front" role="menu" aria-hidden="true" aria-expanded="false" style="display: none;">
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-129" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/sumerian/?icmpid=docs_menu_internal">Amazon Sumerian (Preview)</a></li>
+                        </ul>
+                    </li>
+                    
+                    
+                    <li aria-haspopup="true" class="ui-menu-item" id="ui-id-130" tabindex="-1" role="menuitem"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>Application Integration
+                        <ul class="ui-menu ui-widget ui-widget-content ui-front" role="menu" aria-hidden="true" aria-expanded="false" style="display: none;">
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-131" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/apigateway/?icmpid=docs_menu_internal">Amazon API Gateway</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-132" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/amazon-mq/?icmpid=docs_menu_internal">Amazon MQ</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-133" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/swf/?icmpid=docs_menu_internal">Amazon SWF</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-134" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/step-functions/?icmpid=docs_menu_internal">AWS Step Functions</a></li>
+                        </ul>
+                    </li>
+                    
+                    
+                    <li aria-haspopup="true" class="ui-menu-item" id="ui-id-135" tabindex="-1" role="menuitem"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>Customer Engagement
+                        <ul class="ui-menu ui-widget ui-widget-content ui-front" role="menu" aria-hidden="true" aria-expanded="false" style="display: none;">
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-136" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/sns/?icmpid=docs_menu_internal">Amazon SNS</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-137" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/ses/?icmpid=docs_menu_internal">Amazon SES</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-138" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/sqs/?icmpid=docs_menu_internal">Amazon SQS</a></li>
+                        </ul>
+                    </li>
+                    
+                    
+                    <li aria-haspopup="true" class="ui-menu-item" id="ui-id-139" tabindex="-1" role="menuitem"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>Business Productivity
+                        <ul class="ui-menu ui-widget ui-widget-content ui-front" role="menu" aria-hidden="true" aria-expanded="false" style="display: none;">
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-140" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/a4b/?icmpid=docs_menu_internal">Alexa for Business</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-141" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/workdocs/?icmpid=docs_menu_internal">Amazon WorkDocs</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-142" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/workmail/?icmpid=docs_menu_internal">Amazon WorkMail</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-143" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/chime/?icmpid=docs_menu_internal">Amazon Chime</a></li>
+                        </ul>
+                    </li>
+                    
+                    
+                    <li aria-haspopup="true" class="ui-menu-item" id="ui-id-144" tabindex="-1" role="menuitem"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>Desktop &amp; App Streaming
+                        <ul class="ui-menu ui-widget ui-widget-content ui-front" role="menu" aria-hidden="true" aria-expanded="false" style="display: none;">
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-145" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/workspaces/?icmpid=docs_menu_internal">Amazon WorkSpaces</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-146" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/wam/?icmpid=docs_menu_internal">Amazon WAM</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-147" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/appstream/?icmpid=docs_menu_internal">Amazon AppStream 2.0</a></li>
+                        </ul>
+                    </li>
+                    
+                    
+                    <li aria-haspopup="true" class="ui-menu-item" id="ui-id-148" tabindex="-1" role="menuitem"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>SDKs &amp; Toolkits
+                        <ul class="ui-menu ui-widget ui-widget-content ui-front" role="menu" aria-hidden="true" aria-expanded="false" style="display: none;">
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-149" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/sdk-for-cpp/?icmpid=docs_menu_internal">AWS SDK for C++</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-150" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/sdk-for-go/?icmpid=docs_menu_internal">AWS SDK for Go</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-151" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/sdk-for-java/?icmpid=docs_menu_internal">AWS SDK for Java</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-152" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/sdk-for-javascript/?icmpid=docs_menu_internal">AWS SDK for JavaScript</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-153" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/sdk-for-net/?icmpid=docs_menu_internal">AWS SDK for .NET</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-154" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/sdk-for-php/?icmpid=docs_menu_internal">AWS SDK for PHP</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-155" tabindex="-1" role="menuitem"><a href="http://boto3.readthedocs.org/en/latest/?icmpid=docs_menu_internal">AWS SDK for Python (boto)</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-156" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/sdk-for-ruby/?icmpid=docs_menu_internal">AWS SDK for Ruby</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-157" tabindex="-1" role="menuitem"><a href="http://docs.aws.amazon.com/AWSToolkitEclipse/latest/ug/welcome.html?icmpid=docs_menu_internal">AWS Toolkit for Eclipse</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-158" tabindex="-1" role="menuitem"><a href="http://docs.aws.amazon.com/AWSToolkitVS/latest/UserGuide/welcome.html?icmpid=docs_menu_internal">AWS Toolkit for Visual Studio</a></li>
+                        </ul>
+                    </li>
+                    
+                    
+                    <li aria-haspopup="true" class="ui-menu-item" id="ui-id-159" tabindex="-1" role="menuitem"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>Additional Software &amp; Services
+                        <ul class="ui-menu ui-widget ui-widget-content ui-front" role="menu" aria-hidden="true" aria-expanded="false" style="display: none;">
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-160" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/accountbilling/?icmpid=docs_menu_internal">AWS Billing and Cost Management</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-161" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/marketplace/?icmpid=docs_menu_internal">AWS Marketplace</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-162" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/awssupport/?icmpid=docs_menu_internal">AWS Support</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-163" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/alexatopsites/?icmpid=docs_menu_internal">Alexa Top Sites</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-164" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/awis/?icmpid=docs_menu_internal">Alexa Web Information Service</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-165" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/silk/?icmpid=docs_menu_internal">Amazon Silk</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-166" tabindex="-1" role="menuitem"><a href="http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/welcome.html?icmpid=docs_menu_internal">AWS GovCloud (US)</a></li>
+                        </ul>
+                    </li>
+                    
+                    
+                    <li aria-haspopup="true" class="ui-menu-item" id="ui-id-167" tabindex="-1" role="menuitem"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>AWS General Reference
+                        <ul class="ui-menu ui-widget ui-widget-content ui-front" role="menu" aria-hidden="true" aria-expanded="false" style="display: none;">
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-168" tabindex="-1" role="menuitem"><a href="http://docs.aws.amazon.com/general/latest/gr/rande.html?icmpid=docs_menu_internal">Regions and Endpoints</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-169" tabindex="-1" role="menuitem"><a href="http://docs.aws.amazon.com/general/latest/gr/aws-security-credentials.html?icmpid=docs_menu_internal">Security Credentials</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-170" tabindex="-1" role="menuitem"><a href="http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html?icmpid=docs_menu_internal">ARNs &amp; Service Namespaces</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-171" tabindex="-1" role="menuitem"><a href="http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html?icmpid=docs_menu_internal">Service Limits</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-172" tabindex="-1" role="menuitem"><a href="http://docs.aws.amazon.com/general/latest/gr/glos-chap.html?icmpid=docs_menu_internal">AWS Glossary</a></li>
+                        </ul>
+                    </li>
+                    
+                    
+                    <li aria-haspopup="true" class="ui-menu-item" id="ui-id-173" tabindex="-1" role="menuitem"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>AWS Management Console
+                        <ul class="ui-menu ui-widget ui-widget-content ui-front" role="menu" aria-hidden="true" aria-expanded="false" style="display: none;">
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-174" tabindex="-1" role="menuitem"><a href="http://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/resource-groups.html?icmpid=docs_menu_internal">Resource Groups</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-175" tabindex="-1" role="menuitem"><a href="http://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/tag-editor.html?icmpid=docs_menu_internal">Tag Editor</a></li>
+                        </ul>
+                    </li>
+                    
+                    
+                    <li aria-haspopup="true" class="ui-menu-item" id="ui-id-176" tabindex="-1" role="menuitem"><span class="ui-menu-icon ui-icon ui-icon-carat-1-e"></span>Resources
+                        <ul class="ui-menu ui-widget ui-widget-content ui-front" role="menu" aria-hidden="true" aria-expanded="false" style="display: none;">
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-177" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/quickstart/?icmpid=docs_menu_internal">AWS Quick Starts</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-178" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/whitepapers/?icmpid=docs_menu_internal">AWS Whitepapers</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-179" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/training/?icmpid=docs_menu_internal">AWS Training &amp; Certification</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-180" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/solutions/case-studies/?icmpid=docs_menu_internal">AWS Case Studies</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-181" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/documentation/kindle/?icmpid=docs_menu_internal">AWS Documentation on Kindle</a></li>
+                            <li class="awsdocs-flyout-link-wrapper ui-menu-item" id="ui-id-182" tabindex="-1" role="menuitem"><a href="http://aws.amazon.com/archives/?icmpid=docs_menu_internal">AWS Documentation Archive</a></li>
+                        </ul>
+                    </li>
+                    
+                </ul>
+            <div id="topnav-flyout-menu-spacer"></div>
+         </div>
+      </div>
+      <div id="content-container">
+         <div id="left-column" class="ui-resizable" style="width: 350px;">
+            <div id="left-col-header">
+               <div xmlns:db="http://docbook.org/ns/docbook" id="left-col-top-content">
+                  <div id="service-name">AWS Lambda </div>
+                  <div id="search"><i id="search-icon" class="fa fa-search fa-2x"></i></div>
+                  <div id="guide-info">Developer Guide
+                     <div id="content-button"><i id="toggle-contents" class="fa fa-bars"></i></div>
+                  </div>
+               </div>
+               <form id="finegrainedSearch" method="get" onsubmit="return searchFormSubmit(this);" action="https://docs.aws.amazon.com/search/doc-search.html">
+                  <div id="search-form"><select id="search-select" name="searchPath">
+                        <option value="all">Entire Site</option>
+                        <option value="AWSMarketplace">AMIs from AWS Marketplace</option>
+                        <option value="amis">AMIs from All Sources</option>
+                        <option value="articles">Articles &amp; Tutorials</option>
+                        <option value="products_and_info">AWS Product Information</option>
+                        <option value="case_studies">Case Studies</option>
+                        <option value="customerapps">Customer Apps</option>
+                        <option value="documentation">Documentation</option>
+                        <option value="documentation-product">Documentation - This Product</option>
+                        <option value="documentation-guide" selected="selected">Documentation - This Guide</option>
+                        <option value="datasets">Public Data Sets</option>
+                        <option value="releasenotes">Release Notes</option>
+                        <option value="solution_providers">Partners</option>
+                        <option value="code">Sample Code &amp; Libraries</option></select><br><input id="search-query" name="searchQuery" type="text" placeholder="Search"><input id="search-button" src="./Step 2.1_ Create a Lambda Function Deployment Package - AWS Lambda_files/search-button.png" alt="Go" type="image"></div><input type="hidden" name="this_doc_product" id="this_doc_product" value="AWS Lambda"><input type="hidden" name="this_doc_guide" id="this_doc_guide" value="Developer Guide"><input type="hidden" name="doc_locale" value="en_us"></form>
+            </div>
+            <div id="toc">
+               <ul class="awstoc">
+                  <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/welcome.html">What Is AWS Lambda?</a></li>
+                  <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/getting-started.html">Getting Started</a><ul class="awstoc" style="display: none;">
+                        <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/setup.html">Set Up an AWS Account</a></li>
+                        <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/setup-awscli.html">Set Up the AWS CLI</a></li>
+                        <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/sam-cli-requirements.html">Install SAM Local</a></li>
+                        <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html">Create a Simple Lambda Function and Explore the Console</a><ul class="awstoc" style="display: none;">
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/get-started-create-function.html">Create a Simple Lambda Function</a></li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </li>
+                  <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction-function.html">Lambda Functions</a><ul class="awstoc" style="display: none;">
+                        <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-app.html">Building Lambda Functions</a><ul class="awstoc" style="display: none;">
+                              <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html">Programming Model</a><ul class="awstoc" style="display: none;">
+                                    <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/programming-model.html">Programming Model(Node.js)</a><ul class="awstoc" style="display: none;">
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/nodejs-prog-model-handler.html">Handler (Node.js)</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/nodejs-prog-model-context.html">The Context Object (Node.js)</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/nodejs-prog-model-logging.html">Logging (Node.js)</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/nodejs-prog-mode-exceptions.html">Function Errors (Node.js)</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/nodejs-prog-model-using-old-runtime.html">Using Earlier Node.js Runtime Version (v0.10.42)</a></li>
+                                       </ul>
+                                    </li>
+                                    <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/java-programming-model.html">Programming Model (Java)</a><ul class="awstoc" style="display: none;">
+                                          <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/java-programming-model-handler-types.html">Handler (Java)</a><ul class="awstoc" style="display: none;">
+                                                <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/java-programming-model-req-resp.html">Handler Input/Output Types (Java)</a><ul class="awstoc" style="display: none;">
+                                                      <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/java-handler-io-type-pojo.html">Example: Using POJOs for Handler Input/Output (Java)</a></li>
+                                                      <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/java-handler-io-type-stream.html">Example: Using Stream for Handler Input/Output (Java)</a></li>
+                                                   </ul>
+                                                </li>
+                                                <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/java-handler-using-predefined-interfaces.html">Leveraging Predefined Interfaces for Creating Handler (Java)</a></li>
+                                             </ul>
+                                          </li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/java-context-object.html">The Context Object (Java)</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/java-logging.html">Logging (Java)</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/java-exceptions.html">Function Errors (Java)</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/java-logging-log4j1.html">Using Earlier Custom Appender for Log4j™ 1.2 (Not Recommended)</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/get-started-step4-optional.html">(Optional) Create a Lambda Function Authored in Java</a></li>
+                                       </ul>
+                                    </li>
+                                    <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/python-programming-model.html">Programming Model (Python)</a><ul class="awstoc" style="display: none;">
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/python-programming-model-handler-types.html">Handler (Python)</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/python-context-object.html">The Context Object (Python)</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/python-logging.html">Logging (Python)</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/python-exceptions.html">Function Errors (Python)</a></li>
+                                       </ul>
+                                    </li>
+                                    <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/go-programming-model.html">Programming Model (Go)</a><ul class="awstoc" style="display: none;">
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/go-programming-model-handler-types.html">Handler (Go)</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/go-programming-model-context.html">The Context Object (Go)</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/go-programming-model-logging.html">Logging (Go)</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/go-programming-model-errors.html">Function Errors (Go)</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/go-programming-model-env-variables.html">Using Environment Variables (Go)</a></li>
+                                       </ul>
+                                    </li>
+                                    <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/dotnet-programming-model.html">Programming Model (C#)</a><ul class="awstoc" style="display: none;">
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/dotnet-programming-model-handler-types.html">Handler (C#)</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/dotnet-context-object.html">The Context Object (C#)</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/dotnet-logging.html">Logging (C#)</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/dotnet-exceptions.html">Function Errors (C#)</a></li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                              <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/deployment-package-v2.html">Creating a Deployment Package</a><ul class="awstoc" style="display: none;">
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/nodejs-create-deployment-pkg.html">Creating a Deployment Package (Node.js)</a></li>
+                                    <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-dotnet-how-to-create-deployment-package.html">Creating a Deployment Package (C#)</a><ul class="awstoc" style="display: none;">
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-dotnet-coreclr-deployment-package.html">.NET Core CLI</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-dotnet-create-deployment-package-toolkit.html">AWS Toolkit for Visual Studio</a></li>
+                                       </ul>
+                                    </li>
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-go-how-to-create-deployment-package.html">Creating a Deployment Package (Go)</a></li>
+                                    <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-java-how-to-create-deployment-package.html">Creating a Deployment Package (Java)</a><ul class="awstoc" style="display: none;">
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/java-create-jar-pkg-maven-no-ide.html">Creating a .jar Deployment Package Using Maven without any IDE (Java)</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/java-create-jar-pkg-maven-and-eclipse.html">Creating a .jar Deployment Package Using Maven and Eclipse IDE (Java)</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/create-deployment-pkg-zip-java.html">Creating a .zip Deployment Package (Java)</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/java-author-using-eclipse-sdk-plugin.html">Authoring Lambda Functions Using Eclipse IDE and AWS SDK Plugin (Java)</a></li>
+                                       </ul>
+                                    </li>
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-python-how-to-create-deployment-package.html">Creating a Deployment Package (Python)</a></li>
+                                 </ul>
+                              </li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/test-sam-local.html">Test Your Serverless Applications Locally Using SAM Local (Public Beta)</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/code-editor.html">Creating Functions Using the AWS Lambda Console Editor</a></li>
+                           </ul>
+                        </li>
+                        <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/resource-model.html">Configuring Lambda Functions</a></li>
+                        <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/accessing-resources.html">Accessing Resources from a Lambda Function</a><ul class="awstoc" style="display: none;">
+                              <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/vpc.html">VPC Support</a><ul class="awstoc" style="display: none;">
+                                    <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/vpc-tutorials.html">Tutorials: Accessing Resources in an Amazon VPC</a><ul class="awstoc" style="display: none;">
+                                          <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/vpc-ec.html">Tutorial: Accessing Amazon ElastiCache in an Amazon VPC</a><ul class="awstoc" style="display: none;">
+                                                <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/vpc-ec-create-ec-cluster.html">Step 1: Create an ElastiCache Cluster</a></li>
+                                                <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/vpc-ec-create-lambda-function.html">Step 2: Create a Lambda Function</a><ul class="awstoc" style="display: none;">
+                                                      <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/vpc-ec-deployment-pkg.html">Step 2.1: Create a Deployment Package</a></li>
+                                                      <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/vpc-ec-create-iam-role.html">Step 2.2: Create the Execution Role</a></li>
+                                                      <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/vpc-ec-upload-deployment-pkg.html">Step 2.3: Create the Lambda Function (Upload the Deployment Package)</a></li>
+                                                   </ul>
+                                                </li>
+                                                <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/vpc-ec-invoke-lambda-function.html">Step 3: Test the Lambda Function (Invoke Manually)</a></li>
+                                             </ul>
+                                          </li>
+                                          <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/vpc-rds.html">Tutorial: Accessing Amazon RDS in an Amazon VPC</a><ul class="awstoc" style="display: none;">
+                                                <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/vpc-rds-create-rds-mysql.html">Step 1: Create an Amazon RDS Instance</a></li>
+                                                <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/vpc-rds-create-lambda-function.html">Step 2: Create a Lambda Function</a><ul class="awstoc" style="display: none;">
+                                                      <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/vpc-rds-deployment-pkg.html">Step 2.1: Create a Deployment Package</a></li>
+                                                      <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/vpc-rds-create-iam-role.html">Step 2.2: Create the Execution Role</a></li>
+                                                      <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/vpc-rds-upload-deployment-pkg.html">Step 2.3: Create the Lambda Function</a></li>
+                                                   </ul>
+                                                </li>
+                                                <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/vpc-rds-invoke-lambda-function.html">Step 3: Test the Lambda Function (Invoke Manually)</a></li>
+                                             </ul>
+                                          </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/running-lambda-code.html">AWS Lambda Execution Model</a></li>
+                     </ul>
+                  </li>
+                  <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/invoking-lambda-functions.html">Invoking Lambda Functions</a><ul class="awstoc" style="display: none;">
+                        <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/java-invocation-options.html">Invocation Types</a></li>
+                        <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/retries-on-errors.html">Understanding Retry Behavior</a></li>
+                        <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/scaling.html">Understanding Scaling Behavior</a></li>
+                        <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/invoking-lambda-function.html">Supported Event Sources</a><ul class="awstoc" style="display: none;">
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/eventsources.html">Sample Event Data</a></li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </li>
+                  <li class="awstoc opened"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/use-cases.html">Use Cases</a><ul class="awstoc">
+                        <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-s3.html">Amazon S3</a><ul class="awstoc" style="display: none;">
+                              <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-s3-example.html">Tutorial</a><ul class="awstoc" style="display: none;">
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-s3-example-prepare.html">Step 1: Prepare</a></li>
+                                    <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-s3-example-create-test-manually.html">Step 2: Create a Lambda Function and Invoke It Manually</a><ul class="awstoc" style="display: none;">
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-s3-example-deployment-pkg.html">Step 2.1: Create a Deployment Package</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-s3-example-create-iam-role.html">Step 2.2: Create the Execution Role</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-s3-example-upload-deployment-pkg.html">Step 2.3: Create the Lambda Function and Test It Manually</a></li>
+                                       </ul>
+                                    </li>
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-s3-example-configure-event-source.html">Step 3: Add an Event Source</a></li>
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-s3-example-use-app-spec.html">Step 4: Deploy With AWS SAM and AWS CloudFormation</a></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html">Kinesis</a><ul class="awstoc" style="display: none;">
+                              <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis-example.html">Tutorial</a><ul class="awstoc" style="display: none;">
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis-example-prepare.html">Step 1: Prepare</a></li>
+                                    <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis-example-create-test-manually.html">Step 2: Create a Lambda Function and Invoke It Manually</a><ul class="awstoc" style="display: none;">
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis-example-deployment-pkg.html">Step 2.1: Create a Deployment Package</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis-example-create-iam-role.html">Step 2.2: Create the Execution Role</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis-example-upload-deployment-pkg.html">Step 2.3: Create the Lambda Function and Test It Manually</a></li>
+                                       </ul>
+                                    </li>
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis-example-configure-event-source.html">Step 3: Add an Event Source</a></li>
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis-example-use-app-spec.html">Step 4: Deploy With AWS SAM and AWS CloudFormation</a></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html">Amazon DynamoDB</a><ul class="awstoc" style="display: none;">
+                              <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-ddb-example.html">Tutorial</a><ul class="awstoc" style="display: none;">
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-ddb-prepare.html">Step 1: Prepare</a></li>
+                                    <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-ddb-create-test-function.html">Step 2: Create a Lambda Function and Invoke It Manually</a><ul class="awstoc" style="display: none;">
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-dynamodb-create-package.html">Step 2.1: Create a Lambda Function Deployment Package</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-dynamodb-create-execution-role.html">Step 2.2: Create the Execution Role</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-dynamodb-create-function.html">Step 2.3: Create the Lambda Function and Test It Manually</a></li>
+                                       </ul>
+                                    </li>
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-ddb-configure-ddb.html">Step 3: Add an Event Source</a></li>
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-ddb-example-use-app-spec.html">Step 4: Deploy With AWS SAM and AWS CloudFormation</a></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-cloudtrail.html">AWS CloudTrail</a><ul class="awstoc" style="display: none;">
+                              <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-cloudtrail-example.html">Tutorial</a><ul class="awstoc" style="display: none;">
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-cloudtrail-example-prepare.html">Step 1: Prepare</a></li>
+                                    <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-cloudtrail-example-create-test-manually.html">Step 2: Create a Lambda Function and Invoke It Manually</a><ul class="awstoc" style="display: none;">
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-cloudtrail-example-deployment-pkg.html">Step 2.1: Create a Deployment Package</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-cloudtrail-example-create-iam-role.html">Step 2.2: Create the Execution Role</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-cloudtrail-example-upload-deployment-pkg.html">Step 2.3: Create the Lambda Function and Test It Manually</a></li>
+                                       </ul>
+                                    </li>
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-cloudtrail-example-configure-event-source.html">Step 3: Add Event Source</a></li>
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-ct-example-use-app-spec.html">Step 4: Deploy With AWS SAM and AWS CloudFormation</a></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li class="awstoc opened"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-sns.html">Amazon SNS</a><ul class="awstoc">
+                              <li class="awstoc opened"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-sns-example.html">Tutorial</a><ul class="awstoc">
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-sns-example-prepare.html">Step 1: Prepare</a></li>
+                                    <li class="awstoc opened"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-sns-example-create-test-function.html">Step 2: Create a Lambda Function</a><ul class="awstoc">
+                                          <li class="awstoc leaf"><a class="awstoc selected" href="https://docs.aws.amazon.com/lambda/latest/dg/with-sns-create-package.html">Step 2.1: Create a Lambda Function Deployment Package</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-sns-example-create-iam-role.html">Step 2.2: Create the Execution Role</a></li>
+                                       </ul>
+                                    </li>
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-sns-create-x-account-permissions.html">Step 3: Set Up Cross-Account Permissions</a></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-on-demand-https.html">Amazon API Gateway</a><ul class="awstoc" style="display: none;">
+                              <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-on-demand-https-example.html">Using AWS Lambda with Amazon API Gateway (On-Demand Over HTTPS)</a><ul class="awstoc" style="display: none;">
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-on-demand-https-example-prepare.html">Step 1: Prepare</a></li>
+                                    <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-on-demand-https-example-create-test-manually.html">Step 2: Create a Lambda Function and Test It Manually</a><ul class="awstoc" style="display: none;">
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-on-demand-https-example-deployment-pkg.html">Step 2.1: Create a Deployment Package</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-on-demand-https-example-create-iam-role.html">Step 2.2: Create the Execution Role</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-on-demand-https-example-upload-deployment-pkg_1.html">Step 2.3: Create the Lambda Function and Test It Manually</a></li>
+                                       </ul>
+                                    </li>
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-on-demand-https-example-configure-event-source.html">Step 3: Create an API Using Amazon API Gateway and Test It</a></li>
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-api-example-use-app-spec.html">Step 4: Deploy With AWS SAM and AWS CloudFormation</a></li>
+                                 </ul>
+                              </li>
+                              <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-on-demand-https-example-configure-event-source_1.html">Step 3: Create a Simple Microservice using Lambda and API Gateway</a><ul class="awstoc" style="display: none;">
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-on-demand-https-example-configure-event-source_2.html">Step 3.1: Create an API Using Amazon API Gateway</a></li>
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-on-demand-https-example-configure-event-source-test-end-to-end_1.html">Step 3.2: Test Sending an HTTPS Request</a></li>
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/get-started-step3-optional.html">Step 3.3: (Optional) Try Other Blueprints</a></li>
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/get-started-what-next.html">What's Next?</a></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-on-demand-custom-android.html">Mobile Backend (Android)</a><ul class="awstoc" style="display: none;">
+                              <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-on-demand-custom-android-example.html">Tutorial</a><ul class="awstoc" style="display: none;">
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-on-demand-custom-android-example-prepare.html">Step 1: Prepare</a></li>
+                                    <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-on-demand-custom-android-example-create-test-manually.html">Step 2: Create the Lambda Function and Invoke It Manually</a><ul class="awstoc" style="display: none;">
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-on-demand-custom-android-example-deployment-pkg.html">Step 2.1: Create a Deployment Package</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-on-demand-custom-android-example-create-iam-role.html">Step 2.2: Create the Execution Role</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-on-demand-custom-android-example-upload-deployment-pkg.html">Step 2.3: Create the Lambda Function and Invoke It Manually</a></li>
+                                       </ul>
+                                    </li>
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-on-demand-custom-android-create-cognito-pool.html">Step 3: Create an Amazon Cognito Identity Pool</a></li>
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-ondemand-android-mobile-create-app.html">Step 4: Create a Mobile Application for Android</a></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-scheduled-events.html">Scheduled Events</a><ul class="awstoc" style="display: none;">
+                              <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-scheduledevents-example.html">Tutorial</a><ul class="awstoc" style="display: none;">
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/tutorial-scheduled-events-create-function.html">Step 1: Create a Lambda Function</a></li>
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/tutorial-scheduled-events-test-function.html">Step 2: Test the Lambda Function (Using a Sample Test Event)</a></li>
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/tutorial-scheduled-events-subscribe-sns.html">Step 3: Create an Amazon SNS Topic and Subscribe to It</a></li>
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/tutorial-scheduled-events-create-alarm.html">Step 4: Configure a CloudWatch Alarm</a></li>
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/tutorial-scheduled-events-test-function-again.html">Step 5: Test the Lambda Function Again</a></li>
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-sched-event-example-use-app-spec.html">(Optional): Deploy With AWS SAM and AWS CloudFormation</a></li>
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/tutorial-scheduled-events-schedule-expressions.html">Schedule Expressions Using Rate or Cron</a></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-userapp.html">Custom User Applications</a><ul class="awstoc" style="display: none;">
+                              <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-userapp-walkthrough-custom-events.html">Tutorial</a><ul class="awstoc" style="display: none;">
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-userapp-walkthrough-custom-events-deploy.html">Step 1: Prepare</a></li>
+                                    <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-userapp-walkthrough-custom-events-create-test-function.html">Step 2: Create a Lambda Function and Invoke It Manually</a><ul class="awstoc" style="display: none;">
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-userapp-walkthrough-custom-events-create-nodejs-function.html">Step 2.1: Create a Deployment Package</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-userapp-walkthrough-custom-events-create-iam-role.html">Step 2.2: Create the Execution Role</a></li>
+                                          <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-userapp-walkthrough-custom-events-upload.html">Step 2.3: Create a Lambda Function</a></li>
+                                       </ul>
+                                    </li>
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-userapp-walkthrough-custom-events-invoke.html">Step 3: Invoke the Lambda Function (AWS CLI)</a></li>
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-userapp-walkthrough-custom-events-try-more-api.html">Step 4: Try More CLI Commands (AWS CLI)</a></li>
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-userapp-walkthrough-custom-events-delete-function.html">Step 5: Delete the Lambda Function and IAM Role (AWS CLI)</a></li>
+                                 </ul>
+                              </li>
+                           </ul>
+                        </li>
+                        <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-edge.html">AWS Lambda@Edge</a></li>
+                     </ul>
+                  </li>
+                  <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/deploying-lambda-apps.html">Deploying Lambda-based Applications</a><ul class="awstoc" style="display: none;">
+                        <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">Versioning and Aliases</a><ul class="awstoc" style="display: none;">
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/versioning-intro.html">Versioning</a></li>
+                              <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html">Aliases</a><ul class="awstoc" style="display: none;">
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases-walkthrough1.html">Tutorial: Using AWS Lambda Aliases</a></li>
+                                 </ul>
+                              </li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases-permissions.html">Versioning, Aliases, and Resource Policies</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/how-to-manage-versioning.html">Managing Versioning</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html">Traffic Shifting Using Aliases</a></li>
+                           </ul>
+                        </li>
+                        <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/serverless_app.html">Using the AWS Serverless Application Model (AWS SAM)</a><ul class="awstoc" style="display: none;">
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/serverless-deploy-wt.html">Create Your Own Serverless Application</a></li>
+                           </ul>
+                        </li>
+                        <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/automating-deployment.html">Automating Deployment of Lambda-based Applications</a><ul class="awstoc" style="display: none;">
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/build-pipeline.html">Building a Pipeline for Your Serverless Application</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/automating-updates-to-serverless-apps.html">Gradual Code Deployment</a></li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </li>
+                  <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/troubleshooting.html">Monitoring and Troubleshooting Lambda-based Applications</a><ul class="awstoc" style="display: none;">
+                        <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/monitoring-functions.html">Using Amazon CloudWatch</a><ul class="awstoc" style="display: none;">
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/monitoring-functions-access-metrics.html">Accessing CloudWatch Metrics</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/monitoring-functions-logs.html">Accessing CloudWatch Logs</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/monitoring-functions-metrics.html">Metrics</a></li>
+                           </ul>
+                        </li>
+                        <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-x-ray.html">Using AWS X-Ray</a><ul class="awstoc" style="display: none;">
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/using-x-ray.html">Tracing Lambda-Based Applications with AWS X-Ray</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/enabling-x-ray.html">Setting Up AWS X-Ray with Lambda</a></li>
+                              <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/downstream-tracing.html">Emitting Trace Segments from a Lambda Function</a><ul class="awstoc" style="display: none;">
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/nodejs-tracing.html">Node.js</a></li>
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/java-tracing.html">Java</a></li>
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/python-tracing.html">Python</a></li>
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/go-tracing.html">Go</a></li>
+                                 </ul>
+                              </li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-x-ray-daemon.html">The AWS X-Ray Daemon in the Lambda Environment</a></li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </li>
+                  <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/admin-lambda-apps.html">Administering Lambda-based Applications</a><ul class="awstoc" style="display: none;">
+                        <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/tagging.html">Tagging Lambda Functions</a></li>
+                        <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/logging-using-cloudtrail.html">API Logging with AWS CloudTrail</a></li>
+                        <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-auth-and-access-control.html">Authentication and Access Control</a><ul class="awstoc" style="display: none;">
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/access-control-overview.html">Overview of Managing Access</a></li>
+                              <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/access-control-identity-based.html">Using Identity-Based Policies (IAM Policies)</a><ul class="awstoc" style="display: none;">
+                                    <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/console-specific-permissions.html">Console Permissions</a></li>
+                                 </ul>
+                              </li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html">Using Resource-Based Policies (Lambda Function Policies)</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html">Permissions Model</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-api-permissions-ref.html">Lambda API Permissions Reference</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/policy-templates.html">Policy Templates</a></li>
+                           </ul>
+                        </li>
+                        <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html">Managing Concurrency</a></li>
+                     </ul>
+                  </li>
+                  <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/advanced.html">Advanced Topics</a><ul class="awstoc" style="display: none;">
+                        <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/env_variables.html">Environment Variables</a><ul class="awstoc" style="display: none;">
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/tutorial-env_cli.html">Create a Lambda Function Using Environment Variables</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/tutorial-env_console.html">Create a Lambda Function Using Environment Variables To Store Sensitive Information</a></li>
+                           </ul>
+                        </li>
+                        <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/dlq.html">Dead Letter Queues</a></li>
+                        <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/best-practices.html">Best Practices</a></li>
+                        <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/runtime-support-policy.html">Runtime Support Policy</a></li>
+                     </ul>
+                  </li>
+                  <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/current-supported-versions.html">Execution Environment</a></li>
+                  <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/limits.html">Limits</a></li>
+                  <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_Reference.html">API Reference</a><ul class="awstoc" style="display: none;">
+                        <li class="awstoc opened"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_Operations.html">Actions</a><ul class="awstoc" style="display: none;">
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_AddPermission.html">AddPermission</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_CreateAlias.html">CreateAlias</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_CreateEventSourceMapping.html">CreateEventSourceMapping</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_CreateFunction.html">CreateFunction</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_DeleteAlias.html">DeleteAlias</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_DeleteEventSourceMapping.html">DeleteEventSourceMapping</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_DeleteFunction.html">DeleteFunction</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_DeleteFunctionConcurrency.html">DeleteFunctionConcurrency</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_GetAccountSettings.html">GetAccountSettings</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_GetAlias.html">GetAlias</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_GetEventSourceMapping.html">GetEventSourceMapping</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunction.html">GetFunction</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunctionConfiguration.html">GetFunctionConfiguration</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_GetPolicy.html">GetPolicy</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html">Invoke</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_InvokeAsync.html">InvokeAsync</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_ListAliases.html">ListAliases</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_ListEventSourceMappings.html">ListEventSourceMappings</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_ListFunctions.html">ListFunctions</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_ListTags.html">ListTags</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_ListVersionsByFunction.html">ListVersionsByFunction</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_PublishVersion.html">PublishVersion</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_PutFunctionConcurrency.html">PutFunctionConcurrency</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_RemovePermission.html">RemovePermission</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_TagResource.html">TagResource</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_UntagResource.html">UntagResource</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_UpdateAlias.html">UpdateAlias</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_UpdateEventSourceMapping.html">UpdateEventSourceMapping</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_UpdateFunctionCode.html">UpdateFunctionCode</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_UpdateFunctionConfiguration.html">UpdateFunctionConfiguration</a></li>
+                           </ul>
+                        </li>
+                        <li class="awstoc closed"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_Types.html">Data Types</a><ul class="awstoc" style="display: none;">
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_AccountLimit.html">AccountLimit</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_AccountUsage.html">AccountUsage</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_AliasConfiguration.html">AliasConfiguration</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_AliasRoutingConfiguration.html">AliasRoutingConfiguration</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_Concurrency.html">Concurrency</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_DeadLetterConfig.html">DeadLetterConfig</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_Environment.html">Environment</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_EnvironmentError.html">EnvironmentError</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_EnvironmentResponse.html">EnvironmentResponse</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_EventSourceMappingConfiguration.html">EventSourceMappingConfiguration</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_FunctionCode.html">FunctionCode</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_FunctionCodeLocation.html">FunctionCodeLocation</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_FunctionConfiguration.html">FunctionConfiguration</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_TracingConfig.html">TracingConfig</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_TracingConfigResponse.html">TracingConfigResponse</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_VpcConfig.html">VpcConfig</a></li>
+                              <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/API_VpcConfigResponse.html">VpcConfigResponse</a></li>
+                           </ul>
+                        </li>
+                     </ul>
+                  </li>
+                  <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/history.html">Document History</a></li>
+                  <li class="awstoc leaf"><a class="awstoc" href="https://docs.aws.amazon.com/lambda/latest/dg/glossary.html">AWS Glossary</a></li>
+                  <li id="toc-additional-links"><a class="btn btn-pdf-link" id="pdf-link-alt" href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-dg.pdf#top" target="_blank" style="background-image: url(&quot;/images/Adobe_PDF_icon.png&quot;)" title="Open PDF"></a></li>
+               </ul>
+            </div>
+         <div class="ui-resizable-handle ui-resizable-e" style="z-index: 90; height: 1369px;"></div></div>
+         <div id="main-column" style="margin-left: 350px;">
+            <div id="main">
+               <div id="main-content">
+                  <div id="main-col-body">
+                     <table summary="Breadcrumbs">
+                        <tbody><tr>
+                           <td>
+                              <div class="breadcrumb"><a href="http://aws.amazon.com/documentation">AWS Documentation</a> » <a href="http://aws.amazon.com/documentation/lambda">AWS Lambda</a> » <a href="https://docs.aws.amazon.com/lambda/latest/dg/index.html">Developer Guide</a> » <a href="https://docs.aws.amazon.com/lambda/latest/dg/use-cases.html">Examples of How to Use AWS Lambda</a> » <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-sns.html">Using AWS Lambda with Amazon SNS from Different Accounts</a> » <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-sns-example.html">Tutorial: Using AWS Lambda with Amazon SNS</a> » <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-sns-example-create-test-function.html">Step 2: Create a
+                                    Lambda Function </a> » <span class="breadcrumb">Step 2.1: Create a Lambda Function
+                                    Deployment Package</span></div>
+                           </td>
+                        </tr>
+                     </tbody></table>
+                     <div></div>
+                     <div id="language-filter" class="page-header" style="">
+                        <form> Filter View: 
+                           <select name="filter-select" id="filter-select">
+                              <option selected="1">All</option>
+                              <option value="Node.js" selected="">Node.js</option>
+                              <option value="Java" selected="">Java</option>
+                              <option value="Go" selected="">Go</option>
+                              <option value="Python" selected="">Python</option></select></form>
+                     </div>
+                     <h1 class="topictitle" id="with-sns-create-package">Step 2.1: Create a Lambda Function
+                        Deployment Package
+                     </h1>
+                     <p>From the <b>Filter View</b> list, choose the language you want to use for your Lambda
+                        function. The appropriate section appears with code and specific
+                        instructions for creating a deployment package.
+                     </p>
+                     <div id="Node.js" name="Node.js" class="section langfilter">
+                        <h2 id="with-sns-example-deployment-pkg-nodejs">Node.js</h2>
+                        
+                        
+                        
+                        <ol>
+                           <li>
+                              
+                              <p>Open a text editor, and then copy the following code. </p>
+                              <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="nohighlight  hljs">console.log('Loading function');
+ 
+exports.handler = function(event, context, callback) {
+// console.log('Received event:', JSON.stringify(event, null, 4));
+ 
+    var message = event.Records[0].Sns.Message;
+    console.log('Message received from SNS:', message); 
+    callback(null, "Success");
+};</code></pre><div class="aws-note">
+                                 <p class="aws-note">Note</p>
+                                 <p>The code sample is compliant with the Node.js runtimes v6.10 or v4.3. For more information,
+                                    see <a href="https://docs.aws.amazon.com/lambda/latest/dg/programming-model.html">Programming Model(Node.js)</a></p>
+                              </div>
+                              
+                           </li>
+                           <li>
+                              
+                              <p>Save the file as <code>
+                                    index.js</code>.
+                              </p>
+                              
+                           </li>
+                           <li>
+                              
+                              <p>Zip the <code> index.js</code> file as
+                                 <code> LambdaWithSNS.zip</code>. 
+                              </p>
+                              
+                           </li>
+                        </ol>
+                        
+                        <h3 id="sns-create-deployment-pkg-nodejs-next-step">Next Step</h3>
+                        
+                        
+                        <p>
+                           <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-sns-example-create-iam-role.html">Step 2.2: Create the Execution
+                              Role (IAM Role)</a>
+                           
+                        </p>
+                        
+                        
+                     </div>
+                     <div id="Java" name="Java" class="section langfilter">
+                        <h2 id="with-sns-example-deployment-pkg-java">Java</h2>
+                        
+                        
+                        <p>Open a text editor, and then copy the following code. </p>
+                        <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="nohighlight  hljs">package example;
+ 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+ 
+import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.events.SNSEvent;
+ 
+public class LogEvent implements RequestHandler&lt;SNSEvent, Object&gt; {
+    public Object handleRequest(SNSEvent request, Context context){
+    String timeStamp = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss").format(Calendar.getInstance().getTime());
+    context.getLogger().log("Invocation started: " + timeStamp);
+ 
+         context.getLogger().log(request.getRecords().get(0).getSNS().getMessage());
+   
+    timeStamp = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss").format(Calendar.getInstance().getTime());
+    context.getLogger().log("Invocation completed: " + timeStamp);
+           return null;
+     }
+}
+ </code></pre>
+                        
+                        <p>Using the preceding code (in a file named <code>LambdaWithSNS.java</code>),
+                           create a deployment package. Make sure that you add the following dependencies: 
+                        </p>
+                        
+                        <div class="itemizedlist">
+                           
+                           
+                           
+                           
+                           <ul class="itemizedlist" type="disc">
+                              <li class="listitem">
+                                 
+                                 <p><code class="code">aws-lambda-java-core</code></p>
+                                 
+                              </li>
+                              <li class="listitem">
+                                 
+                                 <p><code class="code">aws-lambda-java-events</code> 
+                                 </p>
+                                 
+                              </li>
+                           </ul>
+                        </div>
+                        
+                        
+                        <p>For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/java-programming-model.html">Programming Model for Authoring Lambda Functions in Java</a>.
+                        </p>
+                        
+                        <p>Your deployment package can be a .zip file or a standalone .jar. You can
+                           use any build and packaging tool you are familiar with to create a
+                           deployment package. For examples of how to use
+                           the Maven build tool to create a standalone .jar, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/java-create-jar-pkg-maven-no-ide.html">Creating a .jar Deployment Package Using Maven without any
+                              IDE (Java)</a> and <a href="https://docs.aws.amazon.com/lambda/latest/dg/java-create-jar-pkg-maven-and-eclipse.html">Creating a .jar Deployment Package Using Maven and Eclipse IDE (Java)</a>. For an example of how to use the Gradle build
+                           tool to create a .zip file, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/create-deployment-pkg-zip-java.html">Creating a .zip Deployment Package (Java)</a>.
+                        </p>
+                        
+                        <p>After you verify that your deployment package is created, go to the next step 
+                           to create an IAM role (execution role). You specify this role at the
+                           time you create your Lambda function. 
+                        </p>
+                        
+                        
+                        <h3 id="sns-create-deployment-pkg-java-next-step">Next Step</h3>
+                        
+                        
+                        <p>
+                           <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-sns-example-create-iam-role.html">Step 2.2: Create the Execution
+                              Role (IAM Role)</a>
+                           
+                        </p>
+                        
+                        
+                     </div>
+                     <div id="Go" name="Go" class="section langfilter">
+                        <h2 id="with-sns-example-deployment-pkg-go">Go</h2>
+                        
+                        
+                        
+                        <ol>
+                           <li>
+                              
+                              <p>Open a text editor, and then copy the following code. </p>
+                              
+                              <pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="nohighlight  hljs">import (
+    "strings"
+    "github.com/aws/aws-lambda-go/events”
+)
+
+func handler(ctx context.Context, events.SNSEvent snsEvent) {
+    for _, record := range snsEvent.Records {
+        snsRecord := record.SNS
+
+        fmt.Printf("[%s %s] Message = %s \n", record.EventSource, snsRecord.Timestamp, snsRecord.Message) 
+    }
+}</code></pre>
+                              </li>
+                           <li>
+                              
+                              <p>Save the file as <code>
+                                    lambda_handler.go</code>.
+                              </p>
+                              
+                           </li>
+                           <li>
+                              
+                              <p>Zip the <code> lambda_handler.go</code> file as
+                                 <code> LambdaWithSNS.zip</code>. 
+                              </p>
+                              
+                           </li>
+                        </ol>
+                        
+                        <h3 id="sns-create-deployment-pkg-python-next-step">Next Step</h3>
+                        
+                        
+                        <p>
+                           <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-sns-example-create-iam-role.html">Step 2.2: Create the Execution
+                              Role (IAM Role)</a>
+                           
+                        </p>
+                        
+                        
+                     </div>
+                     <div id="Python" name="Python" class="section langfilter">
+                        <h2 id="with-sns-example-deployment-pkg-python">Python</h2>
+                        
+                        
+                        
+                        <ol>
+                           <li>
+                              
+                              <p>Open a text editor, and then copy the following code. </p>
+                              
+                              <div class="aws-note">
+                                 <p class="aws-note">Note</p>
+                                 <p>The <code class="code">from __future__</code> statement
+                                    enables you to write code that is compatible with Python 2 or 3. If you are using
+                                    runtime version 3.6, it is not necessary to include it.
+                                 </p>
+                              </div><pre class="programlisting"><div class="code-btn-container"><div class="btn-copy-code" title="Copy"></div><div class="btn-dark-theme" title="Dark theme" title-dark="Dark theme" title-light="Light theme"></div></div><code class="nohighlight  hljs">from __future__ import print_function
+import json
+print('Loading function')
+
+def lambda_handler(event, context):
+    #print("Received event: " + json.dumps(event, indent=2))
+    message = event['Records'][0]['Sns']['Message']
+    print("From SNS: " + message)
+    return message
+</code></pre>
+                              </li>
+                           <li>
+                              
+                              <p>Save the file as <code>
+                                    lambda_handler.py</code>.
+                              </p>
+                              
+                           </li>
+                           <li>
+                              
+                              <p>Zip the <code> lambda_handler.py</code> file as
+                                 <code> LambdaWithSNS.zip</code>. 
+                              </p>
+                              
+                           </li>
+                        </ol>
+                        
+                        <h3 id="sns-create-deployment-pkg-python-next-step">Next Step</h3>
+                        
+                        
+                        <p>
+                           <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-sns-example-create-iam-role.html">Step 2.2: Create the Execution
+                              Role (IAM Role)</a>
+                           
+                        </p>
+                        
+                        
+                     </div>
+                  </div>
+                  <noscript>
+                     &lt;div&gt;
+                        &lt;div&gt;
+                           &lt;div&gt;
+                              &lt;div id="js_error_message"&gt;
+                                 &lt;p&gt;&lt;img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning" /&gt; &lt;strong&gt;Javascript is disabled or is unavailable in your browser.&lt;/strong&gt;&lt;/p&gt;
+                                 &lt;p&gt;To use the AWS Documentation, Javascript must be enabled. Please refer to your browser's
+                                    Help pages for instructions.
+                                 &lt;/p&gt;
+                              &lt;/div&gt;
+                           &lt;/div&gt;
+                        &lt;/div&gt;
+                     &lt;/div&gt;
+                  </noscript>
+                  <div id="main-col-footer">
+                     <div id="doc-conventions"><a target="_top" href="https://docs.aws.amazon.com/general/latest/gr/docconventions.html">Document Conventions</a></div>
+                     <div id="next"><a class="awstoc" accesskey="p" href="https://docs.aws.amazon.com/lambda/latest/dg/with-sns-example-create-test-function.html">« Previous </a><a class="awstoc" accesskey="n" href="https://docs.aws.amazon.com/lambda/latest/dg/with-sns-example-create-iam-role.html">Next »</a></div>
+                     <div id="copyright-main-footer">© 2018, Amazon Web Services, Inc. or its affiliates. All rights reserved.</div>
+                  </div>
+               </div>
+            </div>
+            <div id="right-expanded">
+               <div id="right-content-wrapper">
+                  <div id="pagetoc">
+                     <p>On this page:</p>
+                     <ul class="pagetoc">
+                        <li class="pagetoc" name="Node.js"><a class="pagetoc selected" href="https://docs.aws.amazon.com/lambda/latest/dg/with-sns-create-package.html#with-sns-example-deployment-pkg-nodejs">Node.js</a></li>
+                        <li class="pagetoc" name="Java"><a class="pagetoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-sns-create-package.html#with-sns-example-deployment-pkg-java">Java</a></li>
+                        <li class="pagetoc" name="Go"><a class="pagetoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-sns-create-package.html#with-sns-example-deployment-pkg-go">Go</a></li>
+                        <li class="pagetoc" name="Python"><a class="pagetoc" href="https://docs.aws.amazon.com/lambda/latest/dg/with-sns-create-package.html#with-sns-example-deployment-pkg-python">Python</a></li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div id="footer">
+         <div id="footer_short_fb" class="hide" title="Feedback"><a target="_blank" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=Lambda%20Docs&amp;topic_url=http://docs.aws.amazon.com/en_us/lambda/latest/dg/with-sns-create-package.html&amp;hidden_guide_name=Developer%20Guide&amp;hidden_api_version=&amp;hidden_file_name=with-sns-create-package"><i class="fa fa-envelope-o"></i></a></div>
+         <div id="footer_toggle" class="mediaobject"><img id="footer_toggle_img" src="./Step 2.1_ Create a Lambda Function Deployment Package - AWS Lambda_files/expanderarrow.png"><img id="footer_toggle_img_collapse" class="hide" src="./Step 2.1_ Create a Lambda Function Deployment Package - AWS Lambda_files/expanderarrowright.png"></div>
+         <div id="footer-left"><a target="_top" href="http://aws.amazon.com/terms">Terms of Use</a> | <a target="_top" href="http://aws.amazon.com/privacy">Privacy</a> | © 2018, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+         </div>
+         <div id="footer-right">
+            <div id="feedback">
+               <div id="forums"><a id="forum_link" target="_blank" href="http://forums.aws.amazon.com/forum.jspa?forumID=186">Have a question? Try the Forums.</a></div>
+               <div id="feedback-message">Did this page help you?</div>
+               <div id="feedback-yesno-buttons"><a class="awstoc btn btn-default" target="_blank" href="https://docs.aws.amazon.com/lambda/latest/dg/feedbackyes.html?topic_url=http://docs.aws.amazon.com/en_us/lambda/latest/dg/with-sns-create-package.html">Yes</a><a class="awstoc btn btn-default" target="_blank" href="https://docs.aws.amazon.com/lambda/latest/dg/feedbackno.html?topic_url=http://docs.aws.amazon.com/en_us/lambda/latest/dg/with-sns-create-package.html">No</a></div>
+               <div id="feedback-feedback-button"><a class="awstoc btn btn-default" target="_blank" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=Lambda%20Docs&amp;topic_url=http://docs.aws.amazon.com/en_us/lambda/latest/dg/with-sns-create-package.html&amp;hidden_guide_name=Developer%20Guide&amp;hidden_api_version=&amp;hidden_file_name=with-sns-create-package">Feedback</a></div>
+            </div>
+         </div>
+      </div>
+      <!-- SiteCatalyst code version: H.25.2.
+            Copyright 1996-2012 Adobe, Inc. All Rights Reserved
+            More info available at http://www.omniture.com --><script language="JavaScript" type="text/javascript" src="./Step 2.1_ Create a Lambda Function Deployment Package - AWS Lambda_files/awshome_s_code.js.download"></script><script language="JavaScript" type="text/javascript">
+         <!--
+
+            // Documentation Service Name
+            s.prop66='AWS Lambda';
+            s.eVar66='D=c66';
+  
+            // Documentation Guide Name                                                                 
+            s.prop65='Developer Guide';
+            s.eVar65='D=c65';
+
+            var s_code=s.t();if(s_code)document.write(s_code)//--></script><script language="JavaScript" type="text/javascript">
+         <!--
+                if(navigator.appVersion.indexOf('MSIE')>=0)document.write(unescape('%3C')+'\!-'+'-')
+                //--></script><noscript>&lt;img src="https://amazonwebservices.d2.sc.omtrdc.net/b/ss/awsamazondev/1/H.25.2--NS/0" height="1" width="1" border="0" alt="" /&gt;</noscript>
+      <!--/DO NOT REMOVE/-->
+      <!-- End SiteCatalyst code version: H.25.2. -->
+   
+<div id="cboxOverlay" style="display: none;"></div><div id="colorbox" class="" role="dialog" tabindex="-1" style="display: none;"><div id="cboxWrapper"><div><div id="cboxTopLeft" style="float: left;"></div><div id="cboxTopCenter" style="float: left;"></div><div id="cboxTopRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxMiddleLeft" style="float: left;"></div><div id="cboxContent" style="float: left;"><div id="cboxTitle" style="float: left;"></div><div id="cboxCurrent" style="float: left;"></div><button type="button" id="cboxPrevious"></button><button type="button" id="cboxNext"></button><button id="cboxSlideshow"></button><div id="cboxLoadingOverlay" style="float: left;"></div><div id="cboxLoadingGraphic" style="float: left;"></div></div><div id="cboxMiddleRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxBottomLeft" style="float: left;"></div><div id="cboxBottomCenter" style="float: left;"></div><div id="cboxBottomRight" style="float: left;"></div></div></div><div style="position: absolute; width: 9999px; visibility: hidden; display: none; max-width: none;"></div></div><div class="ui-selectmenu-menu ui-front"><ul aria-hidden="true" aria-labelledby="languageSelection-button" id="languageSelection-menu" class="ui-menu ui-widget ui-widget-content ui-corner-bottom" role="listbox" tabindex="0"></ul></div></body></html>

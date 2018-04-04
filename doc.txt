@@ -1,0 +1,109 @@
+// install ssm-agent on your desired instance which you want to be managed by Systems Manager.
+
+mkdir /tmp/ssm
+cd /tmp/ssm
+wget https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/debian_amd64/amazon-ssm-agent.deb
+sudo dpkg -i amazon-ssm-agent.deb
+sudo systemctl status amazon-ssm-agent
+
+Run the following commands if the previous command returned "amazon-ssm-agent is stopped," "inactive," or "disabled
+Start the service:
+sudo systemctl enable amazon-ssm-agent
+sudo systemctl start amazon-ssm-agent
+
+Check the status of the agent:
+sudo systemctl status amazon-ssm-agent
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+			 
+			 
+			 
+			 
+			 
+	from __future__ import print_function
+
+import json
+import boto3
+print('Loading function')
+
+
+def lambda_handler(event, context):
+    #print("Received event: " + json.dumps(event, indent=2))
+    message = event['Records'][0]['Sns']['Message']
+    print("From SNS: " + message) 
+	if message == "on":   
+			ssm_client = boto3.client('ssm', region_name="us-east-2") # use region code in which you are working
+			response = ssm_client.send_command(
+					 InstanceIds=[
+						"i-0d40bf0f0d09b981c" # use instance id on which you want to execute, even multiple is allowd
+							 ],
+					 DocumentName="AWS-RunShellScript",
+					 Parameters = {
+						'commands': [
+							"sudo iptables -I INPUT -p tcp --dport 80 -j ACCEPT"
+							   ]
+						   }
+					 )
+			
+			
+//////////////////////////////////////////////////////////////////////////
+from __future__ import print_function
+
+
+import boto3
+import time
+import json
+
+print('Loading function')
+
+
+def lambda_handler(event, context):
+    #print("Received event: " + json.dumps(event, indent=2))
+    message = event['Records'][0]['Sns']['Message']
+    #print("From SNS: " + message)
+    instanceId = 'i-0d40bf0f0d09b981c'
+    if (message=='start') :
+        ssmClient = boto3.client('ssm')
+        ssmCommand = ssmClient.send_command(
+        InstanceIds = [
+           instanceId
+        ],
+        DocumentName = 'AWS-RunShellScript',
+        TimeoutSeconds = 240,
+        Comment = 'Run nginx',
+        Parameters = {
+           'commands': [
+              "sudo iptables -I INPUT -p tcp --dport 80 -j ACCEPT"
+          ]
+        }
+    )
+    else :
+        ssmClient = boto3.client('ssm')
+        ssmCommand = ssmClient.send_command(
+        InstanceIds = [
+           instanceId
+        ],
+        DocumentName = 'AWS-RunShellScript',
+        TimeoutSeconds = 240,
+        Comment = 'Donot Run Tests',
+        Parameters = {
+           'commands': [
+             "sudo iptables -I INPUT -p tcp --dport 80 -j DROP"
+          ]
+        }
+    )
+    print("From SNS: " + message)
+
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+        
+        
